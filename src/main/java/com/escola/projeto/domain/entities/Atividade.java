@@ -5,12 +5,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @Document(collection = "atividades")
 public class Atividade {
     @Id
+    private String id;
     private String titulo;
     private String enunciado;
-    private LocalDate dataCadastro;
-    private LocalDate dataAtualizacao;
+    private LocalDateTime dataCadastro;
+    private LocalDateTime dataAtualizacao;
 }
