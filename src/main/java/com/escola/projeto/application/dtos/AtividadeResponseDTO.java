@@ -21,7 +21,8 @@ public class AtividadeResponseDTO {
         this.setId(atividade.getId());
         this.setTitulo(atividade.getTitulo());
         this.setEnunciado(atividade.getEnunciado());
-        this.setDataAtualizacao(atividade.getDataAtualizacao());
         this.setDataCadastro(atividade.getDataCadastro());
+        this.setDataAtualizacao(atividade.getDataAtualizacao());
+
     }
 }
