@@ -25,33 +25,36 @@ public class AtividadeServiceImpl implements AtividadeService {
 
     @Autowired
     AtividadeRepository atividadeRepository;
+
     /**
-     *
+     * cadastra nova atividade
      */
     @Override
     @Transactional
-    public void Cadastro(AtividadeRequestDTO atividadeRequestDTO) {
+    public String Cadastro(AtividadeRequestDTO atividadeRequestDTO) {
         Atividade atividade = new Atividade(atividadeRequestDTO);
-        atividadeRepository.save(atividade);
+        Atividade savedAtividade = atividadeRepository.save(atividade);
+        return savedAtividade.getId();
     }
 
     /**
      * @param id
-     * @return
+     * @return busca uma atividade pelo id
      */
     @Override
     @Transactional
     public AtividadeResponseDTO Busca(String id) {
         Optional<Atividade> atividade = atividadeRepository.findById(id);
         if (atividade.isEmpty()) {
-            throw new ApiException("Não existe atividade com o id informado");
+            throw new ApiException("id não encontrado");
         }
         AtividadeResponseDTO atividadeResponseDTO = new AtividadeResponseDTO(atividade.get());
         return atividadeResponseDTO;
     }
 
     /**
-     * @param pageable
+     * busca todas atividades
+     *
      * @return
      */
     @Override
@@ -65,21 +68,30 @@ public class AtividadeServiceImpl implements AtividadeService {
     }
 
     /**
+     * atualiza campos de atividades
+     *
      * @param atividadeUpdateRequestDTO
      */
     @Override
     @Transactional
-    public void atualiza(AtividadeUpdateRequestDTO atividadeUpdateRequestDTO) {
-        Atividade atividade = new Atividade(atividadeUpdateRequestDTO);
+    public void atualiza(String id, AtividadeUpdateRequestDTO atividadeUpdateRequestDTO) {
+        AtividadeResponseDTO oldAtividade = this.Busca(id);
+        if (oldAtividade.getId() == null) {
+            throw new ApiException("Atividade não existe");
+        }
+        Atividade atividade = new Atividade(atividadeUpdateRequestDTO, oldAtividade);
         atividadeRepository.save(atividade);
     }
 
     /**
-     * @param id
+     * @param id deleta atividade por id
      */
     @Override
     public void deleta(String id) {
         AtividadeResponseDTO atividadeResponseDTO = this.Busca(id);
+        if (atividadeResponseDTO.getId() == null) {
+            throw new ApiException("atividade não existe");
+        }
         Atividade atividade = new Atividade(atividadeResponseDTO);
         atividadeRepository.delete(atividade);
     }

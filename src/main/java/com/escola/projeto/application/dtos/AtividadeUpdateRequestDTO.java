@@ -13,13 +13,11 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class AtividadeUpdateRequestDTO {
 
-    private String id;
     private String titulo;
     private String enunciado;
 
 
     public AtividadeUpdateRequestDTO(Atividade atividade) {
-        this.setId(atividade.getId());
         this.setTitulo(atividade.getTitulo());
         this.setEnunciado(atividade.getEnunciado());
     }

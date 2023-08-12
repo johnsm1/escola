@@ -11,13 +11,13 @@ import java.util.List;
 
 public interface AtividadeService {
 
-    public void Cadastro(AtividadeRequestDTO atividadeRequestDTO);
+    public String Cadastro(AtividadeRequestDTO atividadeRequestDTO);
 
     public AtividadeResponseDTO Busca(String id);
 
     public List<AtividadeResponseDTO> BuscarTodos(PageFilterDTO page);
 
-    public void atualiza(AtividadeUpdateRequestDTO atividadeUpdateRequestDTO);
+    public void atualiza(String id,AtividadeUpdateRequestDTO atividadeUpdateRequestDTO);
 
     public void deleta(String id);
 

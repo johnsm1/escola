@@ -1,5 +1,6 @@
 package com.escola.projeto.application.dtos;
 
+import com.escola.projeto.domain.entities.Estudante;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,11 @@ public class EstudanteResponseDTO  {
     private String nome;
     private String telefone;
     private String email;
+
+    public EstudanteResponseDTO(Estudante estudante) {
+        this.setCpf(estudante.getCpf());
+        this.setNome(estudante.getNome());
+        this.setTelefone(estudante.getTelefone());
+        this.setEmail(estudante.getEmail());
+    }
 }
