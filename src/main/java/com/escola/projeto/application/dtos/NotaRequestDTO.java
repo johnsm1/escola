@@ -14,10 +14,10 @@ public class NotaRequestDTO {
     private String id;
     @NotNull
     @NotEmpty
-    private String estudanteCpf;
+    private String estudanteId;
     @NotNull
     @NotEmpty
-    private String atividadeTitulo;
+    private String atividadeId;
     @NotNull
     private double nota;
 }

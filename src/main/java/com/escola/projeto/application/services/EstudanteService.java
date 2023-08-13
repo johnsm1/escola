@@ -5,13 +5,13 @@ import com.escola.projeto.application.dtos.*;
 import java.util.List;
 
 public interface EstudanteService {
-    public void Cadastro(EstudanteRequestDTO estudanteRequestDTO);
+    public String cadastro(EstudanteRequestDTO estudanteRequestDTO);
 
-    public EstudanteResponseDTO Busca(String id);
+    public EstudanteResponseDTO busca(String id);
 
-    public List<EstudanteResponseDTO> BuscarTodos(PageFilterDTO page);
+    public List<EstudanteResponseDTO> buscarTodos(PageFilterDTO page);
 
-    public void atualiza(EstudanteUpdateRequestDTO estudanteUpdateRequestDTO);
+    public void atualiza(String id,EstudanteUpdateRequestDTO estudanteUpdateRequestDTO);
 
     public void deleta(String id);
 }

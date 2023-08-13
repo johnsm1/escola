@@ -1,12 +1,12 @@
 package com.escola.projeto.application.services.implementations;
 
-import com.escola.projeto.application.dtos.AtividadeRequestDTO;
-import com.escola.projeto.application.dtos.AtividadeResponseDTO;
-import com.escola.projeto.application.dtos.AtividadeUpdateRequestDTO;
-import com.escola.projeto.application.dtos.PageFilterDTO;
+import com.escola.projeto.application.dtos.*;
 import com.escola.projeto.application.repositories.AtividadeRepository;
+import com.escola.projeto.application.repositories.EstudanteRepository;
 import com.escola.projeto.application.services.AtividadeService;
+import com.escola.projeto.application.services.EstudanteService;
 import com.escola.projeto.domain.entities.Atividade;
+import com.escola.projeto.domain.entities.Estudante;
 import com.escola.projeto.infrastructure.exceptions.ApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,17 +24,18 @@ import java.util.stream.Collectors;
 public class AtividadeServiceImpl implements AtividadeService {
 
     @Autowired
-    AtividadeRepository atividadeRepository;
+    private AtividadeRepository atividadeRepository;
+    @Autowired
+    private EstudanteRepository estudanteRepository;
 
     /**
      * cadastra nova atividade
      */
     @Override
     @Transactional
-    public String Cadastro(AtividadeRequestDTO atividadeRequestDTO) {
+    public String cadastro(AtividadeRequestDTO atividadeRequestDTO) {
         Atividade atividade = new Atividade(atividadeRequestDTO);
-        Atividade savedAtividade = atividadeRepository.save(atividade);
-        return savedAtividade.getId();
+        return atividadeRepository.save(atividade).getId();
     }
 
     /**
@@ -43,7 +44,7 @@ public class AtividadeServiceImpl implements AtividadeService {
      */
     @Override
     @Transactional
-    public AtividadeResponseDTO Busca(String id) {
+    public AtividadeResponseDTO busca(String id) {
         Optional<Atividade> atividade = atividadeRepository.findById(id);
         if (atividade.isEmpty()) {
             throw new ApiException("id não encontrado");
@@ -58,7 +59,8 @@ public class AtividadeServiceImpl implements AtividadeService {
      * @return
      */
     @Override
-    public List<AtividadeResponseDTO> BuscarTodos(PageFilterDTO page) {
+    @Transactional
+    public List<AtividadeResponseDTO> buscarTodos(PageFilterDTO page) {
         Page<Atividade> atividades = atividadeRepository.findAll(PageRequest.of(page.getPage(), page.getSize()));
         List<AtividadeResponseDTO> atividadeResponseDTOS = atividades.getContent()
                 .stream()
@@ -75,7 +77,7 @@ public class AtividadeServiceImpl implements AtividadeService {
     @Override
     @Transactional
     public void atualiza(String id, AtividadeUpdateRequestDTO atividadeUpdateRequestDTO) {
-        AtividadeResponseDTO oldAtividade = this.Busca(id);
+        AtividadeResponseDTO oldAtividade = this.busca(id);
         if (oldAtividade.getId() == null) {
             throw new ApiException("Atividade não existe");
         }
@@ -87,8 +89,9 @@ public class AtividadeServiceImpl implements AtividadeService {
      * @param id deleta atividade por id
      */
     @Override
+    @Transactional
     public void deleta(String id) {
-        AtividadeResponseDTO atividadeResponseDTO = this.Busca(id);
+        AtividadeResponseDTO atividadeResponseDTO = this.busca(id);
         if (atividadeResponseDTO.getId() == null) {
             throw new ApiException("atividade não existe");
         }

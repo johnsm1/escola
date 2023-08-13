@@ -3,14 +3,20 @@ package com.escola.projeto.domain.entities;
 import com.escola.projeto.application.dtos.EstudanteRequestDTO;
 import com.escola.projeto.application.dtos.EstudanteResponseDTO;
 import com.escola.projeto.application.dtos.EstudanteUpdateRequestDTO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "estudantes")
 public class Estudante {
     @Id
@@ -24,6 +30,7 @@ public class Estudante {
     private LocalDateTime dataAtualizacao;
 
     public Estudante(EstudanteRequestDTO estudanteRequestDTO) {
+        this.setId(estudanteRequestDTO.getId());
         this.setCpf(estudanteRequestDTO.getCpf());
         this.setNome(estudanteRequestDTO.getNome());
         this.setTelefone(estudanteRequestDTO.getTelefone());

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,19 +22,23 @@ public class EstudanteServiceImpl implements EstudanteService {
     private EstudanteRepository estudanteRepository;
     /**
      * @param estudanteRequestDTO
+     * cadastra estudante
      */
     @Override
-    public void Cadastro(EstudanteRequestDTO estudanteRequestDTO) {
+    @Transactional
+    public String cadastro(EstudanteRequestDTO estudanteRequestDTO) {
         Estudante estudante = new Estudante(estudanteRequestDTO);
-        estudanteRepository.save(estudante);
+        return estudanteRepository.save(estudante).getId();
     }
 
     /**
      * @param id
      * @return
+     * busca estudante pelo id
      */
     @Override
-    public EstudanteResponseDTO Busca(String id) {
+    @Transactional
+    public EstudanteResponseDTO busca(String id) {
         Optional<Estudante> estudante = estudanteRepository.findById(id);
         if (estudante.isEmpty()) {
             throw new ApiException("Não existe atividade com o id informado");
@@ -45,9 +50,11 @@ public class EstudanteServiceImpl implements EstudanteService {
     /**
      * @param page
      * @return
+     * busca todos estudantes
      */
     @Override
-    public List<EstudanteResponseDTO> BuscarTodos(PageFilterDTO page) {
+    @Transactional
+    public List<EstudanteResponseDTO> buscarTodos(PageFilterDTO page) {
         Page<Estudante> estudantes = estudanteRepository.findAll(PageRequest.of(page.getPage(), page.getSize()));
         List<EstudanteResponseDTO> EstudanteResponseDTOS = estudantes.getContent()
                 .stream()
@@ -58,19 +65,23 @@ public class EstudanteServiceImpl implements EstudanteService {
 
     /**
      * @param estudanteUpdateRequestDTO
+     * atualiza um estudante
      */
     @Override
-    public void atualiza(EstudanteUpdateRequestDTO estudanteUpdateRequestDTO) {
+    @Transactional
+    public void atualiza(String id,EstudanteUpdateRequestDTO estudanteUpdateRequestDTO) {
         Estudante estudante = new Estudante(estudanteUpdateRequestDTO);
         estudanteRepository.save(estudante);
     }
 
     /**
      * @param id
+     * deleta um estudante
      */
     @Override
+    @Transactional
     public void deleta(String id) {
-        EstudanteResponseDTO estudanteResponseDTO = this.Busca(id);
+        EstudanteResponseDTO estudanteResponseDTO = this.busca(id);
         Estudante estudante = new Estudante(estudanteResponseDTO);
         estudanteRepository.delete(estudante);
     }

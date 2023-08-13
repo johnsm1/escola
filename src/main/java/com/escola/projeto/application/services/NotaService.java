@@ -1,17 +1,22 @@
 package com.escola.projeto.application.services;
 
 import com.escola.projeto.application.dtos.*;
+import com.escola.projeto.domain.entities.Nota;
 
 import java.util.List;
 
 public interface NotaService {
-    public void Cadastro(NotaRequestDTO notaRequestDTO);
+    public String cadastro(NotaRequestDTO notaRequestDTO);
 
-    public NotaResponseDTO Busca(String id);
+    public void adicionaEstudante(Nota nota);
 
-    public List<NotaResponseDTO> BuscarTodos(PageFilterDTO page);
+    public void adicionaAtividade(Nota nota);
 
-    public void atualiza(NotaUpdateRequestDTO notaUpdateRequestDTO);
+    public NotaResponseDTO busca(String id);
+
+    public List<NotaResponseDTO> buscarTodas(PageFilterDTO page);
+
+    public void atualiza(String id,NotaUpdateRequestDTO notaUpdateRequestDTO);
 
     public void deleta(String id);
 }

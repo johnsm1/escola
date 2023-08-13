@@ -18,6 +18,7 @@ public class EstudanteResponseDTO  {
     private String email;
 
     public EstudanteResponseDTO(Estudante estudante) {
+        this.setId(estudante.getId());
         this.setCpf(estudante.getCpf());
         this.setNome(estudante.getNome());
         this.setTelefone(estudante.getTelefone());

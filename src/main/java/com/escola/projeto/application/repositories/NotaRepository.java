@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NotaRepository extends MongoRepository<Nota, String> {
+    Nota findByEstudante_IdAndAtividade_Id(String estudanteId,String atividadeId);
 }
