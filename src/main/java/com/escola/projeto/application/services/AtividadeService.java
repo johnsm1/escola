@@ -4,6 +4,7 @@ import com.escola.projeto.application.dtos.AtividadeRequestDTO;
 import com.escola.projeto.application.dtos.AtividadeResponseDTO;
 import com.escola.projeto.application.dtos.AtividadeUpdateRequestDTO;
 import com.escola.projeto.application.dtos.PageFilterDTO;
+import com.escola.projeto.domain.entities.Atividade;
 import org.springframework.data.domain.Page;
 
 import java.awt.print.Pageable;
@@ -11,11 +12,11 @@ import java.util.List;
 
 public interface AtividadeService {
 
-    public String Cadastro(AtividadeRequestDTO atividadeRequestDTO);
+    public String cadastro(AtividadeRequestDTO atividadeRequestDTO);
 
-    public AtividadeResponseDTO Busca(String id);
+    public AtividadeResponseDTO busca(String id);
 
-    public List<AtividadeResponseDTO> BuscarTodos(PageFilterDTO page);
+    public List<AtividadeResponseDTO> buscarTodos(PageFilterDTO page);
 
     public void atualiza(String id,AtividadeUpdateRequestDTO atividadeUpdateRequestDTO);
 
