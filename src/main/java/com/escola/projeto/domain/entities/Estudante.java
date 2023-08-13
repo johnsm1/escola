@@ -20,11 +20,13 @@ import java.util.List;
 @Document(collection = "estudantes")
 public class Estudante {
     @Id
-    private String id;
-    @Indexed(unique = true)
+    private String id;                               //foi indexado cpf email e telefone,mesmo para uma consulta
+    @Indexed(unique = true)                          //pois numa aplicação real haveria consultas por eles bastante
     private String cpf;
     private String nome;
+    @Indexed(unique = true)
     private String telefone;
+    @Indexed(unique = true)
     private String email;
     private LocalDateTime dataCadastro;
     private LocalDateTime dataAtualizacao;

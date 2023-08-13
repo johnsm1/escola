@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +18,7 @@ public class EstudanteUpdateRequestDTO {
     private String cpf;
     private String nome;
     private String telefone;
+    @Email(message = "email não é valido")
     private String email;
 
     public EstudanteUpdateRequestDTO(Estudante estudante) {

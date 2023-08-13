@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -19,5 +20,5 @@ public class NotaRequestDTO {
     @NotEmpty
     private String atividadeId;
     @NotNull
-    private double nota;
+    private BigDecimal nota;
 }

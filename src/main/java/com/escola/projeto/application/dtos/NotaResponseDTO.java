@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -14,9 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 public class NotaResponseDTO {
     private String id;
-    private  Estudante estudante;
-    private  Atividade atividade;
-    private double nota;
+    private Estudante estudante;
+    private Atividade atividade;
+    private BigDecimal nota;
 
     public NotaResponseDTO(Nota nota) {
         this.setId(nota.getId());
