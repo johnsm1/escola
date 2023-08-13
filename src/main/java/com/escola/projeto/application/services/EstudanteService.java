@@ -1,6 +1,7 @@
 package com.escola.projeto.application.services;
 
 import com.escola.projeto.application.dtos.*;
+import com.escola.projeto.domain.entities.Nota;
 
 import java.util.List;
 

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class NotaUpdateRequestDTO {
     private String id;
     @NotNull(message = "A nota não deve ser preenchida")
-    private double nota;
+    private BigDecimal nota;
 
     public NotaUpdateRequestDTO(Nota nota) {
 
