@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/atividades")
+@RequestMapping("/api/atividades")
 public class AtividadeController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class AtividadeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(idRetorno);
     }
 
-    @GetMapping("/busca/{id}")
+    @GetMapping("/public/busca/{id}")
     public ResponseEntity<?> buscarAtividade(@PathVariable String id) {
         try {
             AtividadeResponseDTO atividadeResponseDTO = atividadeService.busca(id);
@@ -42,7 +42,7 @@ public class AtividadeController {
         }
     }
 
-    @GetMapping("/buscar-todos")
+    @GetMapping("/public/buscar-todos")
     public ResponseEntity<List<AtividadeResponseDTO>> buscarTodasAtividades(final PageFilterDTO page) {
         List<AtividadeResponseDTO> atividades = atividadeService.buscarTodos(page);
         return ResponseEntity.ok(atividades);
