@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/estudantes")
+@RequestMapping("/api/estudantes")
 public class EstudanteController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class EstudanteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(idRetorno);
     }
 
-    @GetMapping("/busca/{id}")
+    @GetMapping("/public/busca/{id}")
     public ResponseEntity<?> buscarEstudante(@PathVariable final String id) {
         try {
             EstudanteResponseDTO estudanteResponseDTO = estudanteService.busca(id);
@@ -35,7 +35,7 @@ public class EstudanteController {
         }
     }
 
-    @GetMapping("/buscar-todos")
+    @GetMapping("/public/buscar-todos")
     public ResponseEntity<List<EstudanteResponseDTO>> buscarTodasEstudante(final PageFilterDTO page) {
         List<EstudanteResponseDTO> estudantes = estudanteService.buscarTodos(page);
         return ResponseEntity.ok(estudantes);
